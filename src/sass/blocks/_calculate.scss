@@ -1,0 +1,170 @@
+.calculate{
+    background:url(../img/bg/sec-bg.jpg) center center /cover no-repeat;
+    min-height:625px;
+    padding:42px 0 67px 0;
+    &__wrapper{
+        margin-top: 35px;
+        display: grid;
+        grid-template-columns: 655px 310px;
+        grid-template-rows:auto;
+        grid-auto-rows: auto;
+        column-gap: 100px;
+    }
+    &__subtitle{
+        margin-top: 14px;
+        color: #ffffff;
+        font-size: 26px;
+        font-weight: 300;
+        text-align: center;
+    }
+    &__square{
+       
+        height: 129px;
+        border: 1px solid #ffffff;
+        border-radius:5px;
+        padding:15px 23px;
+        position: relative;
+        &-title{
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 400;
+            text-align: left;
+        }
+    }
+    &__scale{
+        position:absolute;
+        width: 605px;
+        height: 9px;
+        background-color: rgba(255,255,255,0.5);
+        border-radius:20px;
+        bottom:30px;
+        left:50%;
+        transform:translateX(-50%);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &-round{
+            width: 18px;
+            height: 18px;
+            background-color: #ffffff;
+            border-radius:50%; 
+            position:relative;
+            cursor:pointer;
+            &_active{
+                background-color:$main-color;
+                &:before{
+                    content:'';
+                    position:absolute;
+                    width: 5px;
+                    height: 5px;
+                    border-radius:50%;
+                    background-color: #ffffff;
+                    top:50%;
+                    left:50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
+        &-nums{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            grid-template-rows:auto;
+            grid-auto-rows: auto;
+           
+        }
+        &-num{
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 300;
+            text-align: left;
+            &:nth-child(2){
+               padding-left: 30px;
+            }
+            &:nth-child(3){
+                padding-left: 60px;
+            }
+            &:nth-child(4){
+                justify-self: flex-end;
+            }
+                
+        }
+       
+    }
+    &__package{
+        margin-top: 8px;
+        height: 129px;
+        border: 1px solid #ffffff;
+        border-radius:5px;
+        padding:15px 23px;
+        &-title{
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 400;
+            text-align: left;
+        }
+    }
+    &__btns{
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 15px;
+    }
+    &__rate{
+        padding:10px 75px;
+        border-radius:5px;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 400;
+        text-align: center;
+        border:1px solid #fff;
+        &:hover{
+            color:#fff;
+            text-decoration: none;
+        }
+        &_active{
+            background-color:$main-color;
+            border:none;
+        }
+    }
+    &__result{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &-title{
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 400;
+            text-align: center;
+        }
+        &-num{
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 3px;
+        }
+    }
+    &__button{
+       margin-top: 10px;
+        width: 309px;
+        height: 51px;
+        font-size: 14px;
+        font-weight: 400;
+    }
+    &__phone{
+        margin-top: 22px;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 300;
+        text-align: center;
+        a{
+            color:#fff;
+            display: block;
+            font-size: 18px;
+            font-weight: 500;
+            &:hover{
+                text-decoration: none;
+            }
+        }
+    }
+}
