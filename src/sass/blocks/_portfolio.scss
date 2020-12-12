@@ -1,0 +1,82 @@
+.portfolio{
+    padding:50px 0;
+    &__container{
+        margin-top: 24px;
+    }
+    &__tabs{
+        margin: 0 auto;
+        width: 797px;
+        padding-left: 0;
+        list-style-type: none;
+        display:flex;
+        border:1px solid $main-color;
+        border-radius:40px;
+    }
+    &__item{
+        &:nth-child(1){
+            a{
+                border-radius:40px 0 0 40px;
+            }
+        }
+        &:nth-child(4){
+            a{
+                border-radius: 0 40px 40px 0;
+            }
+        }
+    }
+    &__link{
+        display:block;
+        padding: 15px 40px;
+        color: $main-color;
+        font-size: 14px;
+        font-weight: 300;
+        text-align: center;
+        text-transform: uppercase;
+        position:relative;
+        
+        &:hover{
+            color:$main-color;
+            text-decoration: none;
+        }
+        &:after{
+            content:'';
+            position:absolute;
+            width: 1px;
+            height: 39px;
+            background-color:$main-color;
+            right:-1px;
+            top:50%;
+            transform:translateY(-50%);
+        }
+       
+        &_nonAfter{
+            &:after{
+                display: none;
+            }
+        }
+        &_active{
+            background-color:$main-color;
+            color:#fff;
+            &:hover{
+                color:#fff;
+            }
+            &:after{
+                display: none;
+            }
+        }
+    }
+    &__wrapper{
+        margin-top: 23px;
+    }
+    &-block{
+        display:none;
+        grid-template-columns: repeat(3,360px);
+        grid-template-rows:repeat(2,260px);
+        grid-auto-rows: auto;
+        row-gap:30px;
+        column-gap:30px;
+        &_active{
+            display:grid;
+        }
+    }
+}

@@ -117,13 +117,41 @@
         font-weight: 400;
         text-align: center;
         border:1px solid #fff;
+        position: relative;
         &:hover{
+            & > .calculate__rate-descr{
+                position:absolute;
+                top:60px;
+                width:400px;
+                padding:20px 30px;
+                background-color: #ffffff;
+                color:#000;
+                font-size: 14px;
+                left:50%;
+                transform: translateX(-50%);
+                display: block;
+                &:before{
+                    position:absolute;
+                    content:'';
+                    left:50%;
+                    top:-45px;
+                    transform:translateX(-50%);
+                    border:23px solid transparent;
+                    border-bottom:23px solid #fff;
+                    display:block;
+                }
+            }
             color:#fff;
             text-decoration: none;
         }
         &_active{
             background-color:$main-color;
-            border:none;
+            border:1px solid $main-color;
+        }
+        &-descr{
+            display:none;
+            position:relative;
+           
         }
     }
     &__result{

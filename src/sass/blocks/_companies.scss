@@ -1,0 +1,32 @@
+.companies{
+    background-color: #f2f8f9;
+    padding:50px 0;
+    &__slider {
+        width: 1140px;
+        height: 5px;
+        background-color: #E3E7E8;
+        margin-top: 40px;
+    }
+      
+    &__thumb {
+        width: 32px;
+        height: 11px;
+        border-radius: 3px;
+        position: relative;
+        left: 0px;
+        top: -3px;
+        background: $main-color;
+        cursor: pointer;
+    }
+    &__wrapper{
+        margin-top: 15px;
+        overflow: hidden;
+    }
+    &__inner{
+        display: flex;
+        align-items:flex-end;
+        justify-content:space-between;
+        width:200%;
+       
+    }
+}
