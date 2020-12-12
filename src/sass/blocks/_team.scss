@@ -1,0 +1,78 @@
+.team{
+    padding:60px 0;
+    &__wrapper{
+        margin-top: 40px;
+        display:grid;
+        grid-template-columns: repeat(3,225px);
+        grid-template-rows:repeat(2,295px);
+        grid-auto-rows: 295px;
+        row-gap:50px;
+        column-gap:170px;
+        justify-content: center;
+    }
+    &-block{
+        &__name{
+            margin-top: 15px;
+            color: $main-color;
+            font-size: 24px;
+            font-weight: 300;
+            text-align: center;
+        }
+        &__descr{
+            color: #464646;
+            font-size: 16px;
+            font-weight: 300;
+            text-align: center;
+        }
+    }
+    &__statement{
+        position:relative;
+        margin-top: 65px;
+    }
+    &__quote{
+        position:absolute;
+        color:$main-color;
+        font-size: 80px;
+        height:37px;
+        img{
+            display: block;
+        }
+        &_left{
+            top:0;
+            left:0;
+        }
+        &_right{
+            bottom:0;
+            right: 0;
+        }
+    }
+    &__subtitle{
+        font-size: 30px;
+        font-weight: 300;
+        color: #464646;
+        text-align: center;
+    }
+    &__text{
+        width: 945px;
+        margin: 0 auto;
+        margin-top: 10px;
+        color: #464646;
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 26px;
+        text-align: center;
+    }
+    &__name{
+        margin-top: 10px;
+        color: #464646;
+        font-weight: 500;
+        font-size: 18px;
+        text-align: center;
+    }
+    &__descr{
+        color: #464646;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 300;
+    }
+}

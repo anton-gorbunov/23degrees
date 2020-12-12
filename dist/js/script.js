@@ -58,7 +58,6 @@ document.addEventListener('DOMContentLoaded',() => {
         event.preventDefault();
         let target = event.target;
         if (target == target && target.classList.contains('portfolio__link')){
-            console.log(target);
             tabsLinks.forEach((item,i) => {
                   if (target == item){
                         hideAll();
@@ -73,11 +72,13 @@ document.addEventListener('DOMContentLoaded',() => {
     const priceResult = document.querySelector('.priceResult span'),
           avgSquareMeter = document.querySelector('.avgSquareMeter span'),
           square = document.querySelector('.squareMeter span'),
-          areaVariants = document.querySelectorAll('.calculate__scale-round'),
-          packages = document.querySelectorAll('.calculate__rate'),
-          packagesParent = document.querySelector('.calculate__btns');
-    let areaSquare = 10000,
+          areaThumb = document.querySelector('.calculate__scale-round'),
+          areaScale = document.querySelector('.calculate__scale'),
+          packages = document.querySelectorAll('.calculate__rate');
+    let areaSquare = 100,
         package = 4850;
+        areaScaleWidth = window.getComputedStyle(areaScale).width;
+        areaScaleWidth = +areaScaleWidth.slice(0, areaScaleWidth.length-2) - areaThumb.offsetWidth;
 
     function choosePackage(){
         packages.forEach(item => {
@@ -91,20 +92,53 @@ document.addEventListener('DOMContentLoaded',() => {
                     initCalculator();
             });
         });
-           
-        
+    }
+    function findSquareMeters(coords){
+        let percent = areaScaleWidth / 100;
+        areaSquare = Math.round(+areaThumb.getAttribute('data-area')*coords / percent);
+        if (areaSquare <= 100){
+            areaSquare = 100;
+        }
+        areaThumb.style.left = `${coords}px`;
+        initCalculator();
     }
     function chooseArea(){
-        areaVariants.forEach((item,i) => {
-            item.addEventListener('click',() => {
-                areaVariants.forEach(item => {
-                    item.classList.remove('calculate__scale-round_active');
-                });
-                item.classList.add('calculate__scale-round_active');
-                areaSquare = +item.getAttribute('data-area');
-                initCalculator();
-            });
+        areaScale.addEventListener('click',(event) => {
+            let coordsClick = event.clientX-areaScale.getBoundingClientRect().left;
+            if (coordsClick >= areaScaleWidth ){
+                coordsClick = areaScaleWidth;
+            }
+            findSquareMeters(coordsClick);
         });
+        areaThumb.addEventListener('mousedown',(event) => {
+            event.preventDefault();
+            let shiftX = event.clientX - areaThumb.getBoundingClientRect().left;
+            
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+            
+    
+            function onMouseMove(event) {
+                let newLeft = event.clientX - shiftX - areaScale.getBoundingClientRect().left,
+                    rightEdge = areaScale.offsetWidth - areaThumb.offsetWidth;
+                    
+                if (newLeft <= 0) {
+                    newLeft = 0;
+                }
+                if (newLeft > rightEdge) {
+                newLeft = rightEdge;
+                }
+                findSquareMeters(newLeft);
+            }
+            function onMouseUp() {
+                document.removeEventListener('mouseup', onMouseUp);
+                document.removeEventListener('mousemove', onMouseMove);
+            }
+        });
+        areaThumb.addEventListener('dragstart',() => {
+            return false;
+        });
+
     }
     function initCalculator(){
         square.textContent = formatNumber(areaSquare);
@@ -112,7 +146,7 @@ document.addEventListener('DOMContentLoaded',() => {
         priceResult.textContent = formatNumber(areaSquare*package);
     }
     function formatNumber(num){
-        const separator = ' '; // разделитель
+        const separator = ' ';
         let strNum = num.toString(),
             strNew = strNum.substring(strNum.length),
             countNum = 0;
@@ -129,8 +163,6 @@ document.addEventListener('DOMContentLoaded',() => {
     chooseArea();
     initCalculator();
 
-
-
     //drag
     const dragSlider = document.querySelector('.companies__slider'),
           field = document.querySelector('.companies__inner'), 
@@ -141,40 +173,45 @@ document.addEventListener('DOMContentLoaded',() => {
         fieldWidth = window.getComputedStyle(field).width;
         wrapperWidth = +wrapperWidth.slice(0,wrapperWidth.length-2);
         fieldWidth = +fieldWidth.slice(0,fieldWidth.length-2);
-       
+    
+    let  moveIndex = (fieldWidth-wrapperWidth) / wrapperWidth,
+         rightEdge = dragSlider.offsetWidth - thumb.offsetWidth;
+
+    function setCoords(coords){
+        if (coords >= wrapperWidth){
+            coords = wrapperWidth;
+        } else if ( coords <= 0) {
+            coords = 0;
+        }
+        field.style.transform = 'translateX(-'+(coords * moveIndex)+'px)';
+        
+        if (coords > rightEdge) {
+            coords = rightEdge;
+        }
+        thumb.style.left = `${coords}px`;
+    }
+
+    dragSlider.addEventListener('click',(event) => {
+        let coordsClick = event.clientX-areaScale.getBoundingClientRect().left;
+        setCoords(coordsClick);
+    });    
+     
     thumb.addEventListener('mousedown',(event) => {
         event.preventDefault();
         let shiftX = event.clientX - thumb.getBoundingClientRect().left;
         document.addEventListener('mousemove', onMouseMove);
         document.addEventListener('mouseup', onMouseUp);
 
-      function onMouseMove(event) {
-        let newLeft = event.clientX - shiftX - dragSlider.getBoundingClientRect().left,
-            moveIndex = (fieldWidth-wrapperWidth) / wrapperWidth,
-            rightEdge = dragSlider.offsetWidth - thumb.offsetWidth;
-            
-        if (newLeft >= wrapperWidth){
-            newLeft = wrapperWidth;
-        } else if ( newLeft <= 0) {
-            newLeft = 0;
+        function onMouseMove(event) {
+            let newLeft = event.clientX - shiftX - dragSlider.getBoundingClientRect().left;
+            setCoords(newLeft);
         }
-        field.style.transform = 'translateX(-'+(newLeft * moveIndex)+'px)';
-      
-        if (newLeft > rightEdge) {
-          newLeft = rightEdge;
+        function onMouseUp() {
+            document.removeEventListener('mouseup', onMouseUp);
+            document.removeEventListener('mousemove', onMouseMove);
         }
-        thumb.style.left = `${newLeft}px`;
-      }
-
-      function onMouseUp() {
-        document.removeEventListener('mouseup', onMouseUp);
-        document.removeEventListener('mousemove', onMouseMove);
-      }
     });
     thumb.addEventListener('dragstart',() => {
         return false;
     });
-   
-
-   
 });
