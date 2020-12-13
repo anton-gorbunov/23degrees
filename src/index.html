@@ -93,12 +93,15 @@
                <div class="promo__inputs">
                     <input type="text" name="name" placeholder="Ваше имя" required class="promo__input input">
                     <input type="email" name="email" placeholder="E-mail" required class="promo__input input">
-                    <input type="text" name="phone" placeholder="Номер телефона" required class="promo__input input">
+                    <input type="text" name="phone" placeholder="Номер телефона" required class="promo__input input" data-phone>
                </div>
                 <button class="promo__btn button">Оставить заявку!</button>
             </form>
             <div class="promo__confidence">*Мы гарантируем конфидициальность передаваемых данных</div>
-            <div class="promo__down"><img src="icons/down.png" alt="down"></div>
+            <div class="promo-mouse">
+                <div class="promo-mouse__body"></div>
+                <div class="promo-mouse__arrow"></div>
+            </div>
         </div>
     </section>
     <section class="services">
@@ -115,7 +118,7 @@
                         <div class="services__descr">
                             Услуга, направленная на разработку интерьеров помещений с целью обеспечить удобство и эстетически приятное ощущение у человека при нахождении в помещении
                         </div>
-                        <button class="services__button button">Оставить заявку</button>
+                        <button class="services__button button" data-call>Оставить заявку</button>
                     </div>
                 </div>
                 <div class="services__block">
@@ -195,7 +198,7 @@
                         <div class="calculate__result-title">Средняя стоимость объекта:</div>
                         <div class="calculate__result-num priceResult"> <span>48 500</span> тг.</div>
                     </div>
-                    <button class="calculate__button button">
+                    <button class="calculate__button button" data-call>
                         Получить консультацию специалиста
                     </button>
                     <div class="calculate__phone">
@@ -497,6 +500,152 @@
             </div>
         </div>
     </section>
+    <section class="blog">
+        <div class="container">
+            <h2 class="blog__title title">Блог</h2>
+            <div class="blog__line line"></div>
+            <div class="blog__wrapper">
+                <div class="blog-block">
+                    <img src="img/blog/1.jpg" loading="lazy" alt="blog" class="blog-block__img">
+                    <a href="#" class="blog-block__link">
+                        Минимализм – это самый простой, практичный и «спорный» стиль в дизайне интерьеров
+                    </a>
+                </div>
+                <div class="blog-block">
+                    <img src="img/blog/2.jpg" loading="lazy" alt="blog" class="blog-block__img">
+                    <a href="#" class="blog-block__link">
+                        Прованс - это спокойный южный регион Франции, с великолепнейшей природой
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="contacts">
+        <div class="container">
+            <h2 class="contacts__title title title_white">Остались вопросы?</h2>
+            <div class="contacts__line line line_white"></div>
+            <div class="contacts__subtitle">
+                Задайте их в форме ниже и наши специалисты свяжуться с Вами!
+            </div>
+            <div class="contacts__wrapper">
+                <form action="#" class="contacts__form">
+                    <div class="contacts__inputs">
+                        <input type="text" name="name" placeholder="Ваше имя" class="contacts__input" required>
+                        <input type="email" name="email" placeholder="Ваш e-mail" class="contacts__input" required>
+                        <input type="text" name="phone" placeholder="Ваш номер телефона" class="contacts__input" data-phone required>
+                    </div>
+                    <textarea name="message" class="contacts__textarea" placeholder="Ваше сообщение" required></textarea>
+                    <button class="contacts__button button">Оставить заявку!</button>
+                </form>
+                <div class="contacts__contacts">
+                    <div class="contacts-block">
+                        <div class="contacts-block__icon">
+                            <img src="icons/questions/1.png" alt="contacts">
+                        </div>
+                        <div class="contacts-block__link">
+                            <a href="tel:+78968766677">+ 7 896 876 66 77</a>
+                        </div>
+                    </div>
+                    <div class="contacts-block">
+                        <div class="contacts-block__icon">
+                            <img src="icons/questions/2.png" alt="contacts">
+                        </div>
+                        <div class="contacts-block__link">
+                            <a href="tel:+78968766677"> + 7 896 876 66 77</a>
+                        </div>
+                    </div>
+                    <div class="contacts-block">
+                        <div class="contacts-block__icon">
+                            <img src="icons/questions/3.png" alt="contacts">
+                        </div>
+                        <div class="contacts-block__link">
+                            <a href="#">sales@23degree.kz</a>
+                        </div>
+                    </div>
+                    <div class="contacts-block">
+                        <div class="contacts-block__icon">
+                            <img src="icons/questions/4.png" alt="contacts">
+                        </div>
+                        <div class="contacts-block__link">
+                            <a href="#"> skype: 23degree</a>
+                        </div>
+                    </div>
+                    <div class="contacts-block">
+                        <div class="contacts-block__icon">
+                            <img src="icons/questions/5.png" alt="contacts">
+                        </div>
+                        <div class="contacts-block__link">
+                            <a href="#">telegram: 23degree</a>
+                        </div>
+                    </div>
+                    <div class="contacts__descr">График работы: с 9-00 до 18-00. Пн.-Пт.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="map"></div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__wrapper">
+                <div class="footer__menu">
+                    <a href="#" class="footer__link">Главная</a>
+                    <a href="#" class="footer__link">Вопросы-ответы</a>
+                    <a href="#" class="footer__link">Новости</a>
+                    <a href="#" class="footer__link">Тарифы</a>
+                    <a href="#" class="footer__link">Личный кабинет</a>
+                    <a href="#" class="footer__link">Договор публичной оферты</a>
+                </div>
+                <div class="footer__social">
+                    <div class="footer__subtitle">Мы в социальных сетях:</div>
+                    <div class="footer__icons">
+                        <div class="footer__icon">
+                            <a href="#"><img src="icons/social/1.png" alt="social"></a>
+                        </div>
+                        <div class="footer__icon">
+                            <a href="#"><img src="icons/social/2.png" alt="social"></a>
+                        </div>
+                        <div class="footer__icon">
+                            <a href="#"><img src="icons/social/3.png" alt="social"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__line"></div>
+            <div class="footer__wrapper footer__wrapper_last">
+                <div class="footer__rights">
+                    © Kazteleport, 2015. Все права защищены
+                </div>
+                <div class="footer__site">
+                    <div class="footer__subtitle">Создание сайта - </div>
+                    <a href="#"><img src="icons/logo2.png" alt="logo" class="footer__logo"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="overlay">
+        <div class="overlay__modal">
+           <div class="overlay__logo">
+            <img src="icons/logo.png" alt="logo">
+           </div>
+            <div class="overlay__form">
+                <div class="overlay__close">&times;</div>
+                <div class="overlay__title">
+                   Получите консультацию специалиста
+                </div>
+                <form action="#" method="POST">
+                    <input type="text" name="name" class="overlay__input input" placeholder="Ваше имя" required>
+                    <input type="text" name="email" class="overlay__input input" placeholder="Ваш e-mail" required>
+                    <input type="text" name="phone" class="overlay__input input" data-phone placeholder="Ваш телефон" required>
+                    <button class="overlay__button button">Оставить заявку!</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="up-btn"><img src="icons/top.png" alt="Наверх"></div>
+
     <script src="js/script.js"></script>
 </body>
 </html>

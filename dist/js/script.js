@@ -33,6 +33,26 @@ document.addEventListener('DOMContentLoaded',() => {
         });
     });
 
+    //scroll
+
+    const   parentElem = document.querySelector('.promo'),
+            mouseElem = document.querySelector('.promo-mouse');
+
+    function scrollDown() {
+        const windowCoords = parentElem.offsetHeight;
+        function scroll() {
+          if (window.pageYOffset < windowCoords) {
+                window.scrollBy(0, 10);
+                setTimeout(scroll, 0);
+          }
+          if (window.pageYOffset > windowCoords) {
+            window.scrollTo(0, windowCoords);
+          }
+        }
+        scroll();
+    }
+      mouseElem.addEventListener('click', scrollDown);
+
     //tabs
 
     const tabsHeader = document.querySelector('.portfolio__tabs'),
@@ -78,7 +98,7 @@ document.addEventListener('DOMContentLoaded',() => {
     let areaSquare = 100,
         package = 4850;
         areaScaleWidth = window.getComputedStyle(areaScale).width;
-        areaScaleWidth = +areaScaleWidth.slice(0, areaScaleWidth.length-2) - areaThumb.offsetWidth;
+        areaScaleWidth = +areaScaleWidth.replace(/\D/g,'') - areaThumb.offsetWidth;
 
     function choosePackage(){
         packages.forEach(item => {
@@ -171,8 +191,8 @@ document.addEventListener('DOMContentLoaded',() => {
           
     let wrapperWidth = window.getComputedStyle(wrapper).width,
         fieldWidth = window.getComputedStyle(field).width;
-        wrapperWidth = +wrapperWidth.slice(0,wrapperWidth.length-2);
-        fieldWidth = +fieldWidth.slice(0,fieldWidth.length-2);
+        wrapperWidth = +wrapperWidth.replace(/\D/g,'');
+        fieldWidth = +fieldWidth.replace(/\D/g,'');
     
     let  moveIndex = (fieldWidth-wrapperWidth) / wrapperWidth,
          rightEdge = dragSlider.offsetWidth - thumb.offsetWidth;
@@ -214,4 +234,195 @@ document.addEventListener('DOMContentLoaded',() => {
     thumb.addEventListener('dragstart',() => {
         return false;
     });
+
+    //map
+    const mapContainer = document.querySelector('.map');
+    let ok = false;                    
+    window.addEventListener('scroll',() => {
+        if (ok === false) {
+            ok = true;    
+            setTimeout(() => {                    
+                let script = document.createElement('script');
+                script.src = 'https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ad3ce773167875b0595ba1178bd4ed2c88ac2cee29d8e7260365029a0fbfd6d02&amp;width=100%25&amp;height=600&amp;lang=ru_RU&amp;scroll=false';
+                mapContainer.append(script);                        
+            }, 1000);   
+        }
+    });
+
+    // to top
+
+    const btn = document.querySelector('.up-btn');
+
+    document.addEventListener('scroll', () => {
+        let scrolled = window.pageYOffset;
+        let coords = document.documentElement.clientHeight;
+  
+        if (scrolled > coords ){
+            btn.classList.add('up-btn_active');
+        } else {
+            btn.classList.remove('up-btn_active');
+        }
+    });
+  
+    btn.addEventListener('click', backToTop);
+    
+    function backToTop() {
+        
+        if (window.pageYOffset > 0) {
+            window.scrollBy(0,-80);
+            setTimeout(backToTop,0);
+        } 
+    }
+
+    //modal
+    const openBtns = document.querySelectorAll('[data-call]'),
+          modalOverlay = document.querySelector('.overlay'),
+          scroll = calcScroll();
+
+    function calcScroll(){
+        const div = document.createElement('div');
+
+        div.style.width = '50px';
+        div.style.height = '50px';
+        div.style.overflowY = 'scroll';
+        div.style.visibility = 'hidden';
+        document.body.append(div);
+        let scrollWidth = div.offsetWidth - div.clientWidth;
+        div.remove();
+        console.log(scrollWidth);
+        return scrollWidth;
+    }
+    function closeModal(){
+        modalOverlay.classList.remove('overlay_active');
+        document.body.style.overflow = '';
+        document.body.style.marginRight ='0px';   
+    }
+    function openModal(){
+        modalOverlay.classList.add('overlay_active');
+        document.body.style.overflow = 'hidden';
+        document.body.style.marginRight = `${scroll}px`;
+    }
+    openBtns.forEach(item => {
+        item.addEventListener('click',() => {
+            openModal();
+        });
+    });
+    modalOverlay.addEventListener('click',(event) =>{
+        if (event.target.classList.contains('overlay__close')){
+            closeModal();
+        }
+    });
+    modalOverlay.addEventListener('click',(event) => {
+        if (event.target.classList.contains('overlay')){
+            closeModal();
+        }
+    });
+    document.addEventListener('keydown',(event) => {
+        if (event.code == 'Escape') {
+            closeModal();
+        }
+    });
+
+    //inputMask
+
+
+    function setCursorPosition(pos, elem) {
+        elem.focus();
+        if (elem.setSelectionRange) elem.setSelectionRange(pos, pos);
+        else if (elem.createTextRange) {
+            var range = elem.createTextRange();
+            range.collapse(true);
+            range.moveEnd('character', pos);
+            range.moveStart('character', pos);
+            range.select();
+        }
+    }
+    function mask(event) {
+        let matrix = '+7 (___) ___ ____',
+            i = 0,
+            def = matrix.replace(/\D/g, ""),
+            val = this.value.replace(/\D/g, "");
+        if (def.length >= val.length){
+            val = def;
+        } 
+        this.value = matrix.replace(/./g, function(a) {
+            return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? "" : a;
+        });
+        if (event.type == 'blur') {
+            if (this.value.length == 2) {
+                this.value = "";
+            }
+        } else {
+            setCursorPosition(this.value.length, this);
+        } 
+    }
+    const inputs = document.querySelectorAll('[data-phone]');
+    inputs.forEach(item => {
+        item.addEventListener('blur', mask, false);
+        item.addEventListener('input', mask, false);
+        item.addEventListener('focus', mask, false);
+    });
+        
+    //forms
+
+    const postData = async (url, data) => {
+        const result = await fetch(url, {
+            method: 'POST',
+            headers:{
+                'Content-type':'application/json'
+            },
+            body:data
+        });
+        return await result;
+    };
+    const forms = document.querySelectorAll('form'),
+          message = {
+                success: 'Спасибо! Скоро мы с вами свяжемся',
+                failure: 'Что-то пошло не так...',
+          };
+        
+        forms.forEach(item => {
+            bindPostData(item);
+        });
+        function bindPostData(form) {
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(form);
+                const json = JSON.stringify(Object.fromEntries(formData.entries()));
+                    postData('mailer/smart.php',json)
+                .then(() => {
+                    showThanksModal(message.success);
+                }).catch(() => {
+                    showThanksModal(message.failure);
+                }).finally(() => {
+                    form.reset();
+                });
+            });
+        }
+        function showThanksModal(message){
+            const modalPrev = document.querySelector('.overlay__form');
+            document.querySelector('.overlay').classList.add('overlay_active');
+            modalPrev.classList.remove('show');
+            modalPrev.classList.add('hide');
+            let modalThanks = document.createElement('div');
+            modalThanks.classList.add('overlay__form');
+            modalThanks.innerHTML = `
+            <div class="modal__content">
+                <div class="overlay__close">&times;</div>
+                <div class="overlay__title">${message}</div>
+            </div>`;
+            document.querySelector('.overlay__modal').append(modalThanks);
+            setTimeout(() => {
+                    closeModal();
+            }, 2500);
+            setTimeout(() => {
+                modalThanks.remove();
+                modalPrev.classList.add('show');
+                modalPrev.classList.remove('hide');
+            },4000);
+        }
+    
+    
+    
+  
 });
