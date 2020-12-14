@@ -1,6 +1,6 @@
 .best{
     background-color: #f2f8f9;
-    padding:50px 70px;
+    padding:50px 0 70px 0;
     &__wrapper{
         margin-top: 27px;
         display:grid;
@@ -68,7 +68,7 @@
             margin: 10px auto 0 auto;
         }
         &__descr{
-            width:270px;
+            width:255px;
             margin-top: 20px;
             color: #3f3f3f;
             font-size: 14px;

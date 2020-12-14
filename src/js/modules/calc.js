@@ -5,11 +5,9 @@ function calc() {
           areaThumb = document.querySelector('.calculate__scale-round'),
           areaScale = document.querySelector('.calculate__scale'),
           packages = document.querySelectorAll('.calculate__rate');
-    let areaSquare = 100,
+    let areaSquare = 0,
         packageNum = 4850,
-        areaScaleWidth = window.getComputedStyle(areaScale).width;
-        
-        areaScaleWidth = +areaScaleWidth.replace(/\D/g,'') - areaThumb.offsetWidth;
+        areaScaleWidth = areaScale.offsetWidth - areaThumb.offsetWidth;
 
     function choosePackage(){
         packages.forEach(item => {
@@ -25,17 +23,18 @@ function calc() {
         });
     }
     function findSquareMeters(coords){
-        let percent = areaScaleWidth / 100;
+        let percent = areaScaleWidth / 10;
         areaSquare = Math.round(+areaThumb.getAttribute('data-area')*coords / percent);
-        if (areaSquare <= 100){
-            areaSquare = 100;
+        if (areaSquare <= 0){
+            areaSquare = 0;
         }
         areaThumb.style.left = `${coords}px`;
         initCalculator();
     }
     function chooseArea(){
         areaScale.addEventListener('click',(event) => {
-            let coordsClick = event.clientX-areaScale.getBoundingClientRect().left;
+            let coordsClick = event.clientX - areaScale
+                .getBoundingClientRect().left-areaThumb.offsetWidth/2;
             if (coordsClick >= areaScaleWidth ){
                 coordsClick = areaScaleWidth;
             }

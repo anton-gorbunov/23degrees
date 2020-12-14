@@ -4,8 +4,8 @@
         margin-top: 36px;
         display:grid;
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(3,320px);
-        grid-auto-rows: 320px;
+        grid-template-rows: repeat(3,auto);
+        grid-auto-rows: auto;
         row-gap:20px;
     }
     &__block{
@@ -21,7 +21,7 @@
             width:100%;
         }
     }
-    &__right{
+    &_right{
         order:2;
     }
     &__subtitle{

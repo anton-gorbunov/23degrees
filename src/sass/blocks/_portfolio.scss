@@ -78,5 +78,10 @@
         &_active{
             display:grid;
         }
+        &__item{
+            img{
+                width:100%;
+            }
+        }
     }
 }

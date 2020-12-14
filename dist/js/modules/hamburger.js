@@ -21,11 +21,17 @@ function hamburger(){
     });
 
     menuLinks.forEach(item => {
-        item.addEventListener('click',() => {
+       item.addEventListener('click',(event) => {
+            event.preventDefault();
+            const blockID = item.getAttribute('href');
+            document.querySelector(blockID).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
             closeMenu();
-        });
+       });
     });
-
+    
     menuSocialLinks.forEach(item => {
         item.addEventListener('click',() => {
             closeMenu();

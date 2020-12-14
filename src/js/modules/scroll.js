@@ -1,10 +1,11 @@
-function scroll (initalScreenSelector, mouseSelector) {
+function scroll (initalScreenSelector, elemClickSelector) {
         
     const initalScreen = document.querySelector(initalScreenSelector),
-    mouseElem = document.querySelector(mouseSelector);
+    mouseElem = document.querySelector(elemClickSelector);
 
     function scrollDown() {
-        const windowCoords = initalScreen.offsetHeight;
+        const windowCoords = initalScreen.getBoundingClientRect().top;
+        console.log(windowCoords);
         function scroll() {
             if (window.pageYOffset < windowCoords) {
                     window.scrollBy(0, 10);

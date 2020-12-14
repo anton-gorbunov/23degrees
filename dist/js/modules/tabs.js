@@ -17,7 +17,7 @@ function tabs(tabsHeaderSelector, linksSelector,tabsContentSelector,
     tabsContent[i].classList.add(contentActiveClass, fadeClass);
     }
     hideAll();
-    showActiveTab();
+    showActiveTab(2);
 
     tabsHeader.addEventListener('click',(event) => {
     event.preventDefault();

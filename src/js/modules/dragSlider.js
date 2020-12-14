@@ -5,10 +5,11 @@ function dragSlider(dragSliderSelector, fieldSelector,
           wrapper = document.querySelector(wrapperSelector),
           thumb = dragSlider.querySelector(thumbSelector);
           
-    let wrapperWidth = window.getComputedStyle(wrapper).width,
+    let wrapperWidth = wrapper.offsetWidth,
         fieldWidth = window.getComputedStyle(field).width;
-        wrapperWidth = +wrapperWidth.replace(/\D/g,'');
-        fieldWidth = +fieldWidth.replace(/\D/g,'');
+        fieldWidth = +fieldWidth.slice(0,fieldWidth.length-2);
+    
+        field.style.width = fieldWidth + 'px';
     
     let  moveIndex = (fieldWidth-wrapperWidth) / wrapperWidth,
          rightEdge = dragSlider.offsetWidth - thumb.offsetWidth;
@@ -19,7 +20,7 @@ function dragSlider(dragSliderSelector, fieldSelector,
         } else if ( coords <= 0) {
             coords = 0;
         }
-        field.style.transform = 'translateX(-'+(coords * moveIndex)+'px)';
+        field.style.transform = 'translateX(-'+(coords* moveIndex)+'px)';
         
         if (coords > rightEdge) {
             coords = rightEdge;
@@ -28,7 +29,7 @@ function dragSlider(dragSliderSelector, fieldSelector,
     }
 
     dragSlider.addEventListener('click',(event) => {
-        let coordsClick = event.clientX-dragSlider.getBoundingClientRect().left;
+        let coordsClick = event.clientX-dragSlider.getBoundingClientRect().left - thumb.offsetWidth/2;
         setCoords(coordsClick);
     });    
      

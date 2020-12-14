@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preload" href="fonts/Roboto-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/Roboto-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/Roboto-Medium.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/Roboto-Light.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/styles.min.css">
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="57x57" href="icons/favicon/apple-icon-57x57.png">
@@ -26,26 +30,26 @@
     <title>23degrees</title>
 </head>
 <body>
-    <section class="promo">
+    <div class="promo">
         <div class="promo__overlay">
             <div class="promo__menu">
                 <img src="icons/Close.png" alt="close" class="promo__close">
-               <nav>
+               <nav> 
                     <ul class="promo__list">
                         <li class="promo__item">
-                            <a href="#" class="promo__link">Наши услуги</a>
+                            <a href="#services" class="promo__link">Наши услуги</a>
                         </li>
                         <li class="promo__item">
-                            <a href="#" class="promo__link">Стоимость</a>
+                            <a href="#calculate" class="promo__link">Стоимость</a>
                         </li>
                         <li class="promo__item">
-                            <a href="#" class="promo__link">Портфолио</a>
+                            <a href="#portfolio" class="promo__link">Портфолио</a>
                         </li>
                         <li class="promo__item">
-                            <a href="#" class="promo__link">Наша команда</a>
+                            <a href="#team" class="promo__link">Наша команда</a>
                         </li>
                         <li class="promo__item">
-                            <a href="#" class="promo__link">Контакты</a>
+                            <a href="#contacts" class="promo__link">Контакты</a>
                         </li>
                     </ul>
                </nav>
@@ -75,12 +79,12 @@
                             <div class="header__phone-num"><a href="tel:+78002590936"> 8 (800) 259 09 36</a></div>
                         </div>
                         <div class="header__hamburger">
-                            <div class="header__menu-lines">
+                            <div class="header__hamburger-lines">
                                 <span></span>
                                 <span></span>
                                 <span></span>
                             </div>
-                            <span class="header__menu">МЕНЮ</span>
+                            <span class="header__hamburger-menu">МЕНЮ</span>
                         </div>
                         
                     </div>
@@ -103,14 +107,14 @@
                 <div class="promo-mouse__arrow"></div>
             </div>
         </div>
-    </section>
-    <section class="services">
+    </div>
+    <section class="services" id="services">
         <div class="container">
             <h2 class="services__title title">Наши услуги</h2>
             <div class="services__line line"></div>
             <div class="services__wrapper">
                 <div class="services__block">
-                    <div class="services__img services__right">
+                    <div class="services__img services_right">
                         <img src="img/services/1.jpg" alt="servicesImg">
                     </div>
                     <div class="services__text">
@@ -133,7 +137,7 @@
                     </div>
                 </div>
                 <div class="services__block">
-                    <div class="services__img services__right">
+                    <div class="services__img services_right">
                         <img src="img/services/3.jpg" alt="servicesImg">
                     </div>
                     <div class="services__text">
@@ -146,7 +150,7 @@
             </div>
         </div>
     </section>
-    <section class="calculate">
+    <section class="calculate" id="calculate">
         <div class="container">
             <h2 class="calculate__title title title_white">Расчитать стоимость</h2>
             <div class="calculate__line line line_white"></div>
@@ -158,9 +162,9 @@
                     <div class="calculate__square">
                         <div class="calculate__square-title">Площадь помещения:</div>
                         <div class="calculate__scale-nums">
-                            <div class="calculate__scale-num">100м<sup>2</sup>
+                            <div class="calculate__scale-num">0м<sup>2</sup>
                             </div>
-                            <div class="calculate__scale-num">10 000м<sup>2</sup>
+                            <div class="calculate__scale-num">1 000м<sup>2</sup>
                             </div>
                         </div>
                         <div class="calculate__scale">
@@ -209,15 +213,15 @@
             </div>
         </div>
     </section>
-    <section class="portfolio">
+    <section class="portfolio" id="portfolio">
         <div class="container">
-            <div class="portfolio__title title">Портфолио</div>
+            <h2 class="portfolio__title title">Портфолио</h2>
             <div class="portfolio__line line"></div>
             <div class="portfolio__container">
                 <ul class="portfolio__tabs">
-                    <li class="portfolio__item"><a href="#" class="portfolio__link portfolio__link_active">все проекты</a></li>
+                    <li class="portfolio__item"><a href="#" class="portfolio__link">все проекты</a></li>
                     <li class="portfolio__item"><a href="#" class="portfolio__link">экстерьеры </a></li>
-                    <li class="portfolio__item"><a href="#" class="portfolio__link">жилые интерьеры</a></li>
+                    <li class="portfolio__item"><a href="#" class="portfolio__link portfolio__link_active">жилые интерьеры</a></li>
                     <li class="portfolio__item"><a href="#" class="portfolio__link portfolio__link_nonAfter">общественные интерьеры</a></li>
                 </ul>
                 <div class="portfolio__wrapper">
@@ -452,7 +456,7 @@
             </div>
         </div>
     </section>
-    <section class="team">
+    <section class="team" id="team">
         <div class="container">
             <h2 class="team__title title">Наша команда</h2>
             <div class="team__line line"></div>
@@ -520,7 +524,7 @@
             </div>
         </div>
     </section>
-    <section class="contacts">
+    <section class="contacts" id="contacts">
         <div class="container">
             <h2 class="contacts__title title title_white">Остались вопросы?</h2>
             <div class="contacts__line line line_white"></div>
@@ -622,7 +626,6 @@
             </div>
         </div>
     </footer>
-
     <div class="overlay">
         <div class="overlay__modal">
            <div class="overlay__logo">
