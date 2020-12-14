@@ -4,7 +4,7 @@ function scroll (initalScreenSelector, elemClickSelector) {
     mouseElem = document.querySelector(elemClickSelector);
 
     function scrollDown() {
-        const windowCoords = initalScreen.getBoundingClientRect().top;
+        const windowCoords = initalScreen.offsetHeight;
         console.log(windowCoords);
         function scroll() {
             if (window.pageYOffset < windowCoords) {
