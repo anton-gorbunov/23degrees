@@ -2,12 +2,15 @@ function calc() {
     const priceResult = document.querySelector('.priceResult span'),
           avgSquareMeter = document.querySelector('.avgSquareMeter span'),
           square = document.querySelector('.squareMeter span'),
-          areaThumb = document.querySelector('.calculate__scale-round'),
-          areaScale = document.querySelector('.calculate__scale'),
+          areaScale = document.querySelector('.calculate__scale-inp'),
           packages = document.querySelectorAll('.calculate__rate');
-    let areaSquare = 0,
-        packageNum = 4850,
-        areaScaleWidth = areaScale.offsetWidth - areaThumb.offsetWidth;
+    let areaSquare = 1,
+        packageNum = 4850;
+
+    areaScale.addEventListener('input',(event) => {
+        areaSquare = event.target.value;
+        initCalculator();
+    });
 
     function choosePackage(){
         packages.forEach(item => {
@@ -22,54 +25,7 @@ function calc() {
             });
         });
     }
-    function findSquareMeters(coords){
-        let percent = areaScaleWidth / 10;
-        areaSquare = Math.round(+areaThumb.getAttribute('data-area')*coords / percent);
-        if (areaSquare <= 0){
-            areaSquare = 0;
-        }
-        areaThumb.style.left = `${coords}px`;
-        initCalculator();
-    }
-    function chooseArea(){
-        areaScale.addEventListener('click',(event) => {
-            let coordsClick = event.clientX - areaScale
-                .getBoundingClientRect().left-areaThumb.offsetWidth/2;
-            if (coordsClick >= areaScaleWidth ){
-                coordsClick = areaScaleWidth;
-            }
-            findSquareMeters(coordsClick);
-        });
-        areaThumb.addEventListener('mousedown',(event) => {
-            event.preventDefault();
-            let shiftX = event.clientX - areaThumb.getBoundingClientRect().left;
-            
-            document.addEventListener('mousemove', onMouseMove);
-            document.addEventListener('mouseup', onMouseUp);
-            
-    
-            function onMouseMove(event) {
-                let newLeft = event.clientX - shiftX - areaScale.getBoundingClientRect().left,
-                    rightEdge = areaScale.offsetWidth - areaThumb.offsetWidth;
-                    
-                if (newLeft <= 0) {
-                    newLeft = 0;
-                }
-                if (newLeft > rightEdge) {
-                newLeft = rightEdge;
-                }
-                findSquareMeters(newLeft);
-            }
-            function onMouseUp() {
-                document.removeEventListener('mouseup', onMouseUp);
-                document.removeEventListener('mousemove', onMouseMove);
-            }
-        });
-        areaThumb.addEventListener('dragstart',() => {
-            return false;
-        });
-
-    }
+  
     function initCalculator(){
         square.textContent = formatNumber(areaSquare);
         avgSquareMeter.textContent = formatNumber(packageNum);
@@ -90,7 +46,6 @@ function calc() {
         return strNew;
     }
     choosePackage();
-    chooseArea();
     initCalculator();
 }
 

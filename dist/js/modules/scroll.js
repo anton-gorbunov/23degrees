@@ -5,7 +5,6 @@ function scroll (initalScreenSelector, elemClickSelector) {
 
     function scrollDown() {
         const windowCoords = initalScreen.offsetHeight;
-        console.log(windowCoords);
         function scroll() {
             if (window.pageYOffset < windowCoords) {
                     window.scrollBy(0, 10);

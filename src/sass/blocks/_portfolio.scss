@@ -33,6 +33,7 @@
         text-align: center;
         text-transform: uppercase;
         position:relative;
+        white-space: nowrap;
         
         &:hover{
             color:$main-color;
